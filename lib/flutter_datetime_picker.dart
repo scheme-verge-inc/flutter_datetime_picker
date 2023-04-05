@@ -7,6 +7,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import 'package:flutter_datetime_picker/src/date_model.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 export 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 export 'package:flutter_datetime_picker/src/date_model.dart';
@@ -236,11 +237,13 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     Widget bottomSheet = MediaQuery.removePadding(
       context: context,
       removeTop: true,
-      child: _DatePickerComponent(
-        onChanged: onChanged,
-        locale: this.locale,
-        route: this,
-        pickerModel: pickerModel,
+      child: PointerInterceptor(
+        child: _DatePickerComponent(
+          onChanged: onChanged,
+          locale: this.locale,
+          route: this,
+          pickerModel: pickerModel,
+        ),
       ),
     );
     return InheritedTheme.captureAll(context, bottomSheet);
